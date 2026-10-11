@@ -1,0 +1,100 @@
+@import 'https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&family=Montserrat:wght@300;400;500;600;700;800&display=swap';
+@import 'tailwindcss';
+@import '../../vendor/livewire/flux/dist/flux.css';
+
+@source '../views';
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/flux-pro/stubs/**/*.blade.php';
+@source '../../vendor/livewire/flux/stubs/**/*.blade.php';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Montserrat', 'Segoe UI', sans-serif;
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-body: 'Montserrat', 'Segoe UI', sans-serif;
+
+    --color-navy: #0D1B33;
+    --color-navy-light: #142742;
+    --color-navy-dark: #080f1e;
+    --color-slate-blue: #586B8C;
+    --color-slate-blue-light: #6e82a6;
+    --color-slate-blue-dark: #3D4E6B;
+    --color-warm-gray: #8D8D8D;
+
+    /* Aliases mapped to Slate Blue palette */
+    --color-gold: #586B8C;
+    --color-gold-light: #6e82a6;
+    --color-gold-dark: #3D4E6B;
+}
+
+@layer theme {
+    .dark {
+        --color-accent: var(--color-white);
+        --color-accent-content: var(--color-white);
+        --color-accent-foreground: var(--color-neutral-800);
+    }
+}
+
+/* ==========================================================================
+   SMOOTH ANIMATIONS & CUSTOM CURSOR STYLES
+   ========================================================================== */
+
+/* Custom Magnetic Cursor (Hidden on touch devices) */
+@media (min-width: 1024px) {
+    .custom-cursor-dot {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 8px;
+        height: 8px;
+        background-color: #586B8C;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease;
+    }
+
+    .custom-cursor-circle {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 38px;
+        height: 38px;
+        border: 1.5px solid rgba(88, 107, 140, 0.6);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        transform: translate(-50%, -50%);
+        transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+    }
+
+    body.cursor-hover .custom-cursor-circle {
+        width: 58px;
+        height: 58px;
+        border-color: #586B8C;
+        background-color: rgba(88, 107, 140, 0.12);
+    }
+}
+
+/* Scroll Reveal Base State */
+.reveal-up,
+.reveal-left,
+.reveal-right,
+.reveal-scale {
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+/* Image Hover Zoom Effect */
+.image-anime {
+    overflow: hidden;
+    border-radius: 1rem;
+}
+.image-anime img {
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.image-anime:hover img {
+    transform: scale(1.06);
+}
